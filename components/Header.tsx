@@ -1,0 +1,33 @@
+import { SearchIcon, ShoppingBagIcon } from "lucide-react";
+import { AddProducts } from "./AddProducts";
+import { Navbar } from "./NavBar";
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-50">
+      <div className="bg-[#21500c] text-white text-center py-2 text-sm font-semibold">
+        COD AVAILABLE 🚚Whatsapp - 9877373417
+      </div>
+      <div className="bg-[#e8e5e5] py-4 border-b px-4 lg:px-0">
+        <nav className="lg:max-w-[60vw] lg:mx-auto flex items-center justify-between">
+          <Navbar />
+          <h1>LOGO</h1>
+          <ul className="hidden flex-1 lg:flex items-center space-x-6 ml-16 text-gray-600 font-thin text-[15px]">
+            <li className="cursor-pointer">Home</li>
+            <li className="cursor-pointer">All Products</li>
+            <li className="cursor-pointer">Arts</li>
+            <li className="cursor-pointer">About Us</li>
+            <li className="cursor-pointer">Contact</li>
+          </ul>
+          <div className="flex items-center space-x-4">
+            {/* <AddProducts /> */}
+            <SearchIcon className="h-5 w-5 text-gray-800" />
+            <ShoppingBagIcon className="h-5 w-5 text-gray-800" />
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+export default Header;
