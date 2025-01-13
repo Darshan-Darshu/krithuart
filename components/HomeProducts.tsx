@@ -28,7 +28,7 @@ async function HomeProducts() {
       </h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 mt-4">
         {products.map(({ image, title, price, id }) => (
-          <Product key={id} image={image} title={title} price={price} />
+          <Product key={id} image={image} title={title} price={price} id={id} />
         ))}
       </div>
       <div className="flex items-center justify-center mt-4">

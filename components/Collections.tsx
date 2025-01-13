@@ -1,9 +1,10 @@
 import { db } from "@/lib/db";
+import { Collection } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-async function Collections() {
+async function Collections({ collections }: { collections: Collection[] }) {
   //   const res = await db.collection.create({
   //     data: {
   //       name: "arts",
@@ -11,11 +12,14 @@ async function Collections() {
   //     },
   //   });
   //   https://drive.google.com/file/d/139TYDcwCHtp_xmLGuDZpPEo3cPAFJPYB/view?usp=drive_link
-  const collections = await db.collection.findMany();
+  // const collections = await db.collection.findMany();
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
       {collections.map((collection) => (
-        <Link href={`/collection/${collection.name}`} key={collection.id}>
+        <Link
+          href={`/arts/${collection.style}/${collection.name}`}
+          key={collection.id}
+        >
           <Image
             src={`https://drive.google.com/thumbnail?id=${collection.image}`}
             alt={collection.name}

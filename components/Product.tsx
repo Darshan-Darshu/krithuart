@@ -1,5 +1,6 @@
 import { Nunito } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 
 const nunito = Nunito({
   weight: "500",
@@ -10,13 +11,15 @@ function Product({
   image,
   title,
   price,
+  id,
 }: {
   image: string;
   title: string;
   price: string;
+  id: string;
 }) {
   return (
-    <div className="mt-4 lg:mt-0">
+    <Link href={`/product/${id}`} className="mt-4 lg:mt-0">
       <Image
         src={`https://drive.google.com/thumbnail?id=${image}`}
         alt={title}
@@ -30,7 +33,7 @@ function Product({
         {title}
       </h1>
       <p className="text-gray-400">INR {price}.00</p>
-    </div>
+    </Link>
   );
 }
 
