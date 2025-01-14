@@ -21,7 +21,7 @@ async function HomeProducts() {
   });
   return (
     <div
-      className={`lg:max-w-[60vw] mx-auto pt-12 pb-4 px-3 lg:px-0 ${playfair.className}`}
+      className={`lg:max-w-[60vw] mx-auto pt-4 md:pt-12 pb-4 px-3 lg:px-0 ${playfair.className}`}
     >
       <h1 className="text-3xl lg:text-4xl text-[#787676] ">
         Products that distinguish your home.

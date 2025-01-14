@@ -29,7 +29,7 @@ function Banner() {
           subtitle
         </p>
         <Link
-          href="/art"
+          href="/arts"
           className={`bg-white text-black py-3 px-6 rounded-[4px] shadow-md ${nunito.className}`}
         >
           Shop Now

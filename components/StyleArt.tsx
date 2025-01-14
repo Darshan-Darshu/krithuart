@@ -16,12 +16,12 @@ async function StyleArt() {
   });
   return (
     <div
-      className={`lg:max-w-[60vw] mx-auto pt-6 pb-4 px-3 lg:px-0 ${playfair.className}`}
+      className={`lg:max-w-[60vw] mx-auto lg:pt-6 lg:pb-4 lg:px-0 ${playfair.className}`}
     >
-      <div className="grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-3 grid-cols-2">
+      <div className="grid grid-cols-5">
         {styles.map((style) => (
           <Link href={`/arts/${style.name}`} key={style.id} className="group">
-            <div className="lg:w-44 lg:h-44 md:w-32 md:h-32 w-32 h-32 rounded-full border flex items-center justify-center transition-all duration-200 ease-in-out border-gray-300 p-1 mt-2 ml-4 group-hover:scale-105">
+            <div className="xl:w-40 xl:h-40 lg:w-28 lg:h-28 md:w-28 md:h-28 w-[56px] h-[56px] rounded-full border flex items-center justify-center transition-all duration-200 ease-in-out border-gray-300 p-1 mt-2 ml-4 group-hover:scale-105">
               <Image
                 src={`https://drive.google.com/thumbnail?id=${style.image}`}
                 alt={style.name}
@@ -30,7 +30,7 @@ async function StyleArt() {
                 className="w-full h-full rounded-full object-cover"
               />
             </div>
-            <h1 className="lg:w-52 md:w-40 w-40 text-center pt-2 text-sm text-gray-500 capitalize group-hover:text-gray-800 transition-all duration-200 ease-in-out">
+            <h1 className="xl:w-48 lg:w-36 md:w-36 w-[90px] text-center pt-2 md:text-sm text-[7px] text-gray-500 capitalize group-hover:text-gray-800 transition-all duration-200 ease-in-out">
               {style.name}
             </h1>
           </Link>

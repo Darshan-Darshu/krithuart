@@ -17,10 +17,12 @@ async function ArtPage({
     },
   });
   return (
-    <div className="lg:max-w-[60vw] mx-auto mt-4 px-4 lg:px-0">
+    <div className="lg:max-w-[60vw] mx-auto mt-4 px-0 lg:px-0">
       <StyleArt />
-      <div>
-        <h1 className="text-3xl lg:text-4xl text-[#787676] ">Collection</h1>
+      <div className="px-3 lg:px-0">
+        <h1 className="text-3xl lg:text-4xl text-[#787676] pt-3 lg:pt-0">
+          Collection
+        </h1>
         <span className="text-sm ml-1 text-gray-700">Searched: {style}</span>
         <Collections collections={collections} />
       </div>
