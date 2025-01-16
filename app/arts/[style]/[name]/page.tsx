@@ -17,7 +17,13 @@ async function ProductsPage({ params }: { params: Promise<{ name: string }> }) {
       <span className="text-sm ml-1 text-gray-700">Searched: {name}</span>
       <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-6">
         {products.map(({ image, title, price, id }) => (
-          <Product key={id} image={image} title={title} price={price} id={id} />
+          <Product
+            key={id}
+            image={image[0]}
+            title={title}
+            price={price}
+            id={id}
+          />
         ))}
       </div>
     </div>

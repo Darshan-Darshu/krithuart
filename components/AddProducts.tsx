@@ -17,15 +17,42 @@ export function AddProducts() {
   const handleSubmit = async (formData: FormData) => {
     "use server";
     const title = formData.get("name")?.toString();
-    const image = formData.get("image")?.toString();
+    const image1 = formData.get("image1")?.toString();
+    const image2 = formData.get("image2")?.toString();
+    const feature = formData.get("feature")?.toString();
     const price = formData.get("price")?.toString();
     const collection = formData.get("collection")?.toString();
     const description = formData.get("description")?.toString();
 
-    if (!title || !image || !price || !collection || !description)
-      return alert("Please enter required field");
+    if (
+      !title ||
+      !image1 ||
+      !price ||
+      !collection ||
+      !description ||
+      !feature
+    ) {
+      console.log(title, image1, feature, price, collection, description);
+      return;
+    }
 
-    await addProduct({ title, image, price, collection, description });
+    const images = [image1];
+    const features = [feature];
+
+    if (image2) {
+      images.push(image2);
+    }
+
+    await addProduct({
+      title,
+      image: images,
+      feature: features,
+      price,
+      collection,
+      description,
+      specs: {},
+      availability: "",
+    });
     // https://drive.google.com/file/d/147KK60mmhLiqToVaBqYXCM_U0GwDVgMY/view?usp=drive_link
   };
   return (
@@ -47,10 +74,21 @@ export function AddProducts() {
               <Input id="name" name="name" className="col-span-3" required />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="image" className="text-right">
-                Image Id
+              <Label htmlFor="image1" className="text-right">
+                Image Id 1
               </Label>
-              <Input id="image" name="image" className="col-span-3" required />
+              <Input
+                id="image1"
+                name="image1"
+                className="col-span-3"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="image2" className="text-right">
+                Image Id 2
+              </Label>
+              <Input id="image2" name="image2" className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="price" className="text-right">
@@ -76,6 +114,17 @@ export function AddProducts() {
               <Input
                 id="description"
                 name="description"
+                className="col-span-3"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="description" className="text-right">
+                Feature
+              </Label>
+              <Input
+                id="description"
+                name="feature"
                 className="col-span-3"
                 required
               />

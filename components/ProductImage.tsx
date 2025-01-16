@@ -6,13 +6,12 @@ import Image from "next/image";
 export function ProductImages({ images }: { images: string[] }) {
   const [mainImage, setMainImage] = useState(images[0]);
   const length = images.length;
-  console.log(length);
 
   return (
     <div>
       <div className="relative aspect-square mb-4">
         <Image
-          src={mainImage}
+          src={`https://drive.google.com/thumbnail?id=${mainImage}`}
           alt="Product image"
           fill
           className="object-cover rounded-lg"
@@ -28,7 +27,7 @@ export function ProductImages({ images }: { images: string[] }) {
             }`}
           >
             <Image
-              src={image}
+              src={`https://drive.google.com/thumbnail?id=${image}`}
               alt={`Product image ${index + 1}`}
               fill
               className="object-cover rounded-lg"

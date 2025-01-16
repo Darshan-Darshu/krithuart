@@ -1,6 +1,7 @@
 import Collections from "@/components/Collections";
 import StyleArt from "@/components/StyleArt";
 import { db } from "@/lib/db";
+import { getCollections } from "@/utils/productUtils";
 
 async function ArtPage({
   params,
@@ -11,11 +12,7 @@ async function ArtPage({
 }) {
   const { style } = await params;
   if (!style) return;
-  const collections = await db.collection.findMany({
-    where: {
-      style,
-    },
-  });
+  const collections = await getCollections(style);
   return (
     <div className="lg:max-w-[60vw] mx-auto mt-4 px-0 lg:px-0">
       <StyleArt />

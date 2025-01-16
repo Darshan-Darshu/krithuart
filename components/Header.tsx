@@ -1,6 +1,8 @@
 import { SearchIcon, ShoppingBagIcon } from "lucide-react";
 import { AddProducts } from "./AddProducts";
 import { Navbar } from "./NavBar";
+import BagIcon from "./BagIcon";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 function Header() {
   return (
@@ -22,7 +24,13 @@ function Header() {
           <div className="flex items-center space-x-4">
             {/* <AddProducts /> */}
             <SearchIcon className="h-5 w-5 text-gray-800" />
-            <ShoppingBagIcon className="h-5 w-5 text-gray-800" />
+            <BagIcon />
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </nav>
       </div>

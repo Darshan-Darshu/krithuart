@@ -15,14 +15,17 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  price       String
-  description String
-  image       String
-  collection  String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  price        String
+  description  String
+  feature      String[]
+  image        String[]
+  specs        Json
+  availability String
+  collection   String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Collection {
@@ -40,4 +43,14 @@ model Style {
   image     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Bag {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  bagId      String
+  products   Json[]
+  email      String
+  totalPrice Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

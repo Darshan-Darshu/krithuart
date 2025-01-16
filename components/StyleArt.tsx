@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { getStyles } from "@/utils/productUtils";
 import { Merriweather } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,11 +9,7 @@ const playfair = Merriweather({
 });
 
 async function StyleArt() {
-  const styles = await db.style.findMany({
-    orderBy: {
-      createdAt: "asc",
-    },
-  });
+  const styles = await getStyles();
   return (
     <div
       className={`lg:max-w-[60vw] mx-auto lg:pt-6 lg:pb-4 lg:px-0 ${playfair.className}`}

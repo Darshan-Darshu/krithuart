@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import HomeProducts from "@/components/HomeProducts";
 import StyleArt from "@/components/StyleArt";
+import { Suspense } from "react";
 
 export default async function Home() {
   return (
@@ -10,9 +11,13 @@ export default async function Home() {
         <h1 className="text-3xl lg:text-4xl text-[#787676] ml-3 lg:ml-0 mb-2 lg:mb-0">
           Style
         </h1>
-        <StyleArt />
+        <Suspense fallback={<p>Styleing Loading</p>}>
+          <StyleArt />
+        </Suspense>
       </div>
-      <HomeProducts />
+      <Suspense fallback={<p>Home Products Loading</p>}>
+        <HomeProducts />
+      </Suspense>
     </div>
   );
 }
