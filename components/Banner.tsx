@@ -20,7 +20,7 @@ function Banner() {
         alt=""
         className="h-full w-full object-cover"
       />
-      <div className="absolute bottom-[140px] flex flex-col w-screen items-center justify-center">
+      <div className="absolute bottom-[40px] xl:bottom-[140px] flex flex-col w-screen items-center justify-center">
         <h1
           className={`text-4xl lg:text-6xl text-white ${playfair.className} uppercase`}
         >
