@@ -12,7 +12,6 @@ async function BagIcon() {
 
   const user = await currentUser();
   const email = user?.emailAddresses[0]?.emailAddress;
-  console.log(user);
   if (!email) return;
 
   const bags = await getBagByEmail(email);
