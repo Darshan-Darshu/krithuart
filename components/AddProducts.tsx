@@ -20,9 +20,12 @@ export function AddProducts() {
     const image1 = formData.get("image1")?.toString();
     const image2 = formData.get("image2")?.toString();
     const feature = formData.get("feature")?.toString();
+    const feature1 = formData.get("feature1")?.toString();
     const price = formData.get("price")?.toString();
     const collection = formData.get("collection")?.toString();
     const description = formData.get("description")?.toString();
+    const specs = formData.get("specs")?.toString();
+    const availability = formData.get("availability")?.toString();
 
     if (
       !title ||
@@ -30,7 +33,9 @@ export function AddProducts() {
       !price ||
       !collection ||
       !description ||
-      !feature
+      !feature ||
+      !specs ||
+      !availability
     ) {
       console.log(title, image1, feature, price, collection, description);
       return;
@@ -43,6 +48,10 @@ export function AddProducts() {
       images.push(image2);
     }
 
+    if (feature1) {
+      features.push(feature1);
+    }
+
     await addProduct({
       title,
       image: images,
@@ -51,7 +60,7 @@ export function AddProducts() {
       collection,
       description,
       specs: {},
-      availability: "",
+      availability: availability,
     });
     // https://drive.google.com/file/d/147KK60mmhLiqToVaBqYXCM_U0GwDVgMY/view?usp=drive_link
   };
@@ -119,12 +128,40 @@ export function AddProducts() {
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="description" className="text-right">
+              <Label htmlFor="feature" className="text-right">
                 Feature
               </Label>
               <Input
-                id="description"
+                id="feature"
                 name="feature"
+                className="col-span-3"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="feature1" className="text-right">
+                Feature 1
+              </Label>
+              <Input
+                id="feature1"
+                name="feature1"
+                className="col-span-3"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="specs" className="text-right">
+                specs
+              </Label>
+              <Input id="specs" name="specs" className="col-span-3" required />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="availability" className="text-right">
+                Availability
+              </Label>
+              <Input
+                id="availability"
+                name="availability"
                 className="col-span-3"
                 required
               />

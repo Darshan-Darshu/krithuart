@@ -15,7 +15,8 @@ function Banner() {
   return (
     <div className="lg:h-[calc(100vh-120px)] w-screen relative overflow-hidden">
       <img
-        src="https://www.novomagic.com/cdn/shop/products/TC_06518-Edit.jpg?v=1647951574&width=2000"
+        // src="https://www.novomagic.com/cdn/shop/products/TC_06518-Edit.jpg?v=1647951574&width=2000"
+        src="/assests/banner.jpeg"
         alt=""
         className="h-full w-full object-cover"
       />
@@ -23,11 +24,9 @@ function Banner() {
         <h1
           className={`text-4xl lg:text-6xl text-white ${playfair.className} uppercase`}
         >
-          Web App Name
+          Krithu Resin
         </h1>
-        <p className="mt-2 mb-4 text-[11px] uppercase text-[#eaeaea]">
-          subtitle
-        </p>
+        <p className="mt-2 mb-4 text-[11px] uppercase text-[#eaeaea]">Studio</p>
         <Link
           href="/arts"
           className={`bg-white text-black py-3 px-6 rounded-[4px] shadow-md ${nunito.className}`}

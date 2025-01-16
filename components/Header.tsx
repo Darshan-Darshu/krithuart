@@ -3,6 +3,7 @@ import { AddProducts } from "./AddProducts";
 import { Navbar } from "./NavBar";
 import BagIcon from "./BagIcon";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 function Header() {
   return (
@@ -13,10 +14,14 @@ function Header() {
       <div className="bg-[#e8e5e5] py-4 border-b px-4 lg:px-0">
         <nav className="lg:max-w-[60vw] lg:mx-auto flex items-center justify-between">
           <Navbar />
-          <h1>LOGO</h1>
+          <Link href="/">LOGO</Link>
           <ul className="hidden flex-1 lg:flex items-center space-x-6 ml-16 text-gray-600 font-thin text-[15px]">
-            <li className="cursor-pointer">Home</li>
-            <li className="cursor-pointer">All Products</li>
+            <li className="cursor-pointer">
+              <Link href="/">Home</Link>
+            </li>
+            <li className="cursor-pointer">
+              <Link href="/arts">All Products</Link>
+            </li>
             <li className="cursor-pointer">Arts</li>
             <li className="cursor-pointer">About Us</li>
             <li className="cursor-pointer">Contact</li>
