@@ -9,7 +9,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-50">
       <div className="bg-[#21500c] text-white text-center py-2 text-sm font-semibold">
-        COD AVAILABLE 🚚Whatsapp - 9877373417
+        COD AVAILABLE 🚚Whatsapp - 7619211187
       </div>
       <div className="bg-[#e8e5e5] py-4 border-b px-4 lg:px-0">
         <nav className="lg:max-w-[60vw] lg:mx-auto flex items-center justify-between">
@@ -23,8 +23,12 @@ function Header() {
               <Link href="/arts">All Products</Link>
             </li>
             <li className="cursor-pointer">Arts</li>
-            <li className="cursor-pointer">About Us</li>
-            <li className="cursor-pointer">Contact</li>
+            <li className="cursor-pointer">
+              <Link href="/about">About Us</Link>
+            </li>
+            <li className="cursor-pointer">
+              <Link href="/contact">Contact</Link>
+            </li>
           </ul>
           <div className="flex items-center space-x-4">
             <AddProducts />

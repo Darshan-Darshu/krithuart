@@ -6,7 +6,7 @@ async function StylePage() {
   const user = await currentUser();
   const email = user?.emailAddresses[0].emailAddress;
 
-  const admin = process.env.NEXT_PUBLIC_ADMIN;
+  const admin = process.env.ADMIN;
   if (email !== admin) return notFound();
 
   return (
