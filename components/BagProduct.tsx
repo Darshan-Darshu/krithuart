@@ -33,25 +33,29 @@ async function BagProduct({
               className="rounded-md"
             />
             <div className="flex-grow">
-              <h2 className="text-lg font-semibold capitalize">
+              <h2 className="text-sm lg:text-lg font-semibold capitalize">
                 {product.title}
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 ">
                 INR {Number(product.price).toFixed(2)}
               </p>
             </div>
 
-            <QtyUpdate
-              qty={bagProduct.qty}
-              productId={bagProduct.productId}
-              price={product.price}
-            />
-            <div className="flex items-center space-x-4">
-              <p className="font-semibold">INR {priceQty.toFixed(2)}</p>
-              <DeleteButton
+            <div className="flex flex-col items-end md:flex-row space-y-3 md:space-y-0 space-x-0 md:space-x-4">
+              <QtyUpdate
+                qty={bagProduct.qty}
                 productId={bagProduct.productId}
-                priceQty={priceQty}
+                price={product.price}
               />
+              <div className="flex items-center space-x-2 md:space-x-4">
+                <p className="font-semibold text-[14px] md:text-[16px] lg:txt-[18px]">
+                  INR {priceQty.toFixed(2)}
+                </p>
+                <DeleteButton
+                  productId={bagProduct.productId}
+                  priceQty={priceQty}
+                />
+              </div>
             </div>
           </div>
         </CardContent>

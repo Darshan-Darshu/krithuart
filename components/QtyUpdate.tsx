@@ -43,7 +43,7 @@ function QtyUpdate({
       >
         <Minus className="h-4 w-4" />
       </Button>
-      <p className="w-6 text-center">{optimisticState}</p>
+      <p className="w-4 lg:w-6 text-center">{optimisticState}</p>
       <Button
         variant="outline"
         // disabled={isLoading}

@@ -10,7 +10,7 @@ export const getStyles = unstable_cache(
     }),
 
   ["stle"],
-  { revalidate: 60 * 60 * 24 }
+  { revalidate: 60 * 60 }
 );
 
 export const getProducts = unstable_cache(
@@ -21,7 +21,7 @@ export const getProducts = unstable_cache(
       },
     }),
   ["product"],
-  { revalidate: 60 * 60 * 24 }
+  { revalidate: 60 * 60 }
 );
 
 export const getCollections = unstable_cache(
@@ -33,7 +33,7 @@ export const getCollections = unstable_cache(
     }),
 
   ["collection"],
-  { revalidate: 60 * 60 * 24 }
+  { revalidate: 60 * 60 }
 );
 export const getProductById = unstable_cache(
   async (id: string) =>
@@ -43,5 +43,5 @@ export const getProductById = unstable_cache(
       },
     }),
   ["productId"],
-  { revalidate: 60 * 60 * 24 }
+  { revalidate: 60 * 60 }
 );

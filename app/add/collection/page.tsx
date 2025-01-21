@@ -1,7 +1,14 @@
 import AddCollection from "@/components/AddCollection";
 import { db } from "@/lib/db";
+import { currentUser } from "@clerk/nextjs/server";
+import { notFound } from "next/navigation";
 
-function CollectionPage() {
+async function CollectionPage() {
+  const user = await currentUser();
+  const email = user?.emailAddresses[0].emailAddress;
+
+  const admin = process.env.NEXT_PUBLIC_ADMIN;
+  if (email !== admin) return notFound();
   const stylePromise = db.style.findMany({
     orderBy: {
       createdAt: "desc",

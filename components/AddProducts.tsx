@@ -1,3 +1,5 @@
+"use client";
+
 import { addProduct } from "@/actions/productAction";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,14 +13,24 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useUser } from "@clerk/nextjs";
 import { PlusIcon } from "lucide-react";
+import { useState, useTransition } from "react";
 
 export function AddProducts() {
+  const [isPending, startTranstion] = useTransition();
+  const { isLoaded, isSignedIn, user } = useUser();
+  const [addImage, setAddImage] = useState(0);
+  const [addFeature, setAddFeature] = useState(0);
+  const [addSpecs, setAddSpecs] = useState(0);
+
+  if (!isSignedIn) return;
+  const email = user?.primaryEmailAddress?.emailAddress;
+  const admin = process.env.NEXT_PUBLIC_ADMIN;
+  if (email !== admin) return;
   const handleSubmit = async (formData: FormData) => {
-    "use server";
     const title = formData.get("name")?.toString();
-    const image1 = formData.get("image1")?.toString();
-    const image2 = formData.get("image2")?.toString();
+    const image1 = formData.get("image")?.toString();
     const feature = formData.get("feature")?.toString();
     const feature1 = formData.get("feature1")?.toString();
     const price = formData.get("price")?.toString();
@@ -43,26 +55,57 @@ export function AddProducts() {
 
     const images = [image1];
     const features = [feature];
+    const specsData = {
+      material: "Mesh and high-grade plastic",
+      color: "Black",
+      dimensions: '26"W x 26"D x 38-42"H',
+      weightCapacity: "300 lbs",
+    };
 
-    if (image2) {
-      images.push(image2);
+    if (addImage) {
+      Array(addImage)
+        .fill("")
+        .map((_, i) => {
+          const image2 = formData.get(`image${i + 1}`)?.toString();
+
+          image2 && images.push(image2);
+        });
     }
 
-    if (feature1) {
-      features.push(feature1);
+    if (addFeature) {
+      Array(addFeature)
+        .fill("")
+        .map((_, i) => {
+          const image2 = formData.get(`feature${i + 1}`)?.toString();
+
+          image2 && features.push(image2);
+        });
     }
 
-    await addProduct({
-      title,
-      image: images,
-      feature: features,
-      price,
-      collection,
-      description,
-      specs: {},
-      availability: availability,
-    });
+    startTranstion(
+      async () =>
+        await addProduct({
+          title,
+          image: images,
+          feature: features,
+          price,
+          collection,
+          description,
+          specs: {},
+          availability: availability,
+        })
+    );
     // https://drive.google.com/file/d/147KK60mmhLiqToVaBqYXCM_U0GwDVgMY/view?usp=drive_link
+  };
+
+  const addImageHandler = async () => {
+    setAddImage(addImage + 1);
+  };
+  const addFeatureHandler = async () => {
+    setAddFeature(addFeature + 1);
+  };
+  const addSpecsHandler = async () => {
+    setAddSpecs(addSpecs + 1);
   };
   return (
     <Dialog>
@@ -83,22 +126,31 @@ export function AddProducts() {
               <Input id="name" name="name" className="col-span-3" required />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="image1" className="text-right">
-                Image Id 1
+              <Label htmlFor="image" className="text-right">
+                Image Id
               </Label>
-              <Input
-                id="image1"
-                name="image1"
-                className="col-span-3"
-                required
-              />
+              <Input id="image" name="image" className="col-span-3" required />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="image2" className="text-right">
-                Image Id 2
-              </Label>
-              <Input id="image2" name="image2" className="col-span-3" />
-            </div>
+            {Array(addImage)
+              .fill("")
+              .map((_, i) => (
+                <div key={i} className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor={`image${i + 1}`} className="text-right">
+                    Image Id {i + 1}
+                  </Label>
+                  <Input
+                    id={`image${i + 1}`}
+                    name={`image${i + 1}`}
+                    className="col-span-3"
+                  />
+                </div>
+              ))}
+            <p
+              onClick={addImageHandler}
+              className="-my-2 text-end text-blue-500 underline cursor-pointer"
+            >
+              Add
+            </p>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="price" className="text-right">
                 Price
@@ -138,23 +190,52 @@ export function AddProducts() {
                 required
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="feature1" className="text-right">
-                Feature 1
-              </Label>
-              <Input
-                id="feature1"
-                name="feature1"
-                className="col-span-3"
-                required
-              />
-            </div>
+            {Array(addFeature)
+              .fill("")
+              .map((_, i) => (
+                <div key={i} className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor={`feature${i + 1}`} className="text-right">
+                    Feature {i + 1}
+                  </Label>
+                  <Input
+                    id={`feature${i + 1}`}
+                    name={`feature${i + 1}`}
+                    className="col-span-3"
+                  />
+                </div>
+              ))}
+            <p
+              onClick={addFeatureHandler}
+              className="-my-2 text-end text-blue-500 underline cursor-pointer"
+            >
+              Add
+            </p>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="specs" className="text-right">
-                specs
+                Specs
               </Label>
               <Input id="specs" name="specs" className="col-span-3" required />
             </div>
+            {/* {Array(addSpecs)
+              .fill("")
+              .map((_, i) => (
+                <div key={i} className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor={`specs${i + 1}`} className="text-right">
+                    Specs {i + 1}
+                  </Label>
+                  <Input
+                    id={`specs${i + 1}`}
+                    name={`specs${i + 1}`}
+                    className="col-span-3"
+                  />
+                </div>
+              ))}
+            <p
+              onClick={addSpecsHandler}
+              className="-my-2 text-end text-blue-500 underline cursor-pointer"
+            >
+              Add
+            </p> */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="availability" className="text-right">
                 Availability
@@ -168,7 +249,9 @@ export function AddProducts() {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Add</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? "Adding Product..." : "Add"}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
